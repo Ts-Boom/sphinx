@@ -1,3 +1,7 @@
+/* @license magnet:?xt=urn:btih:87f119ba0b429ba17a44b4bffcab33165ebdacc0&dn=freebsd.txt BSD-2-Clause
+ * SPDX-FileCopyrightText: Copyright 2007-2024 by the Sphinx team
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
 /*
  * Sphinx JavaScript utilities for the full-text search.
  */
@@ -691,3 +695,5 @@ const Search = {
 };
 
 _ready(Search.init);
+
+/* @license-end */

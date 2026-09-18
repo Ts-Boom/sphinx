@@ -167,7 +167,15 @@ class _JavaScriptIndex:
 
     def dumps(self, data: Any) -> str:
         data_json = json.dumps(data, separators=(',', ':'), sort_keys=True)
-        return self.PREFIX + data_json + self.SUFFIX
+        license_header = (
+            '/* @license magnet:?xt=urn:btih:87f119ba0b429ba17a44b4bffcab33165ebdacc0'
+            '&dn=freebsd.txt BSD-2-Clause\n'
+            ' * SPDX-FileCopyrightText: Copyright 2007-2024 by the Sphinx team\n'
+            ' * SPDX-License-Identifier: BSD-2-Clause\n'
+            ' */\n'
+        )
+        license_footer = '\n/* @license-end */'
+        return license_header + self.PREFIX + data_json + self.SUFFIX + license_footer
 
     def loads(self, s: str) -> Any:
         data = s[len(self.PREFIX) : -len(self.SUFFIX)]
@@ -593,10 +601,19 @@ class IndexBuilder:
             .replace('-', '')
             + 'Stemmer'
         )
+        _license_header = (
+            '/* @license magnet:?xt=urn:btih:87f119ba0b429ba17a44b4bffcab33165ebdacc0'
+            '&dn=freebsd.txt BSD-2-Clause'
+        )
         return '\n'.join((
+            _license_header,
+            ' * SPDX-FileCopyrightText: Copyright 2007-2024 by the Sphinx team',
+            ' * SPDX-License-Identifier: BSD-2-Clause',
+            ' */',
             base_js_path.read_text(encoding='utf-8'),
             language_js_path.read_text(encoding='utf-8'),
             f'window.Stemmer = {stemmer_class};',
+            '/* @license-end */',
         ))
 
 

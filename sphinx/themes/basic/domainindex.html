@@ -5,7 +5,12 @@
 {{ super() }}
 {% if not embedded and collapse_index %}
     <script>
+/* @license magnet:?xt=urn:btih:87f119ba0b429ba17a44b4bffcab33165ebdacc0&dn=freebsd.txt BSD-2-Clause
+ * SPDX-FileCopyrightText: Copyright 2007-2024 by the Sphinx team
+ * SPDX-License-Identifier: BSD-2-Clause
+ */
       DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
+/* @license-end */
     </script>
 {% endif %}
 {% endblock %}

@@ -66,10 +66,13 @@ class DummyDomain:
 
 def load_searchindex(path: Path) -> Any:
     searchindex = path.read_text(encoding='utf8')
-    assert searchindex.startswith('Search.setIndex(')
-    assert searchindex.endswith(')')
+    assert searchindex.startswith('/* @license magnet:?xt=urn:btih:87f119ba0b429ba17a44b4bffcab33165ebdacc0&dn=freebsd.txt BSD-2-Clause')
+    assert searchindex.endswith('/* @license-end */')
 
-    return json.loads(searchindex[16:-1])
+    start = searchindex.find('Search.setIndex(') + 16
+    end = searchindex.rfind(')')
+
+    return json.loads(searchindex[start:end])
 
 
 def is_registered_term(index: Any, keyword: str) -> bool:
